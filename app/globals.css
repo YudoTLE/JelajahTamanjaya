@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import 'keen-slider/keen-slider.min.css';
-
+@plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar-hide";
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
