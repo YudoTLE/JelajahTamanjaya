@@ -3,7 +3,7 @@ import { getPostBySlug } from '@/lib/axios';
 import { PortableText } from '@portabletext/react';
 
 type Props = {
-  params: Promise<{ slug: string }> // Updated for Next.js 15
+  params: Promise<{ slug: string }>
 };
 
 export default async function PostPage({ params }: Props) {
