@@ -2,11 +2,13 @@ import { notFound } from 'next/navigation';
 import { getPostBySlug } from '@/lib/axios';
 import { PortableText } from '@portabletext/react';
 
-type Props = {
-  params: { slug: string }
-};
+interface PageParams {
+  params: {
+    slug: string
+  }
+}
 
-export default async function PostPage({ params }: Props) {
+export default async function PostPage({ params }: PageParams) {
   if (!params?.slug) return notFound();
 
   const post = await getPostBySlug(params.slug);
