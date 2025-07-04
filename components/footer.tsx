@@ -2,7 +2,7 @@ import { Mail, Phone, Facebook, Twitter, Instagram, Github } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground pt-12 space-y-10">
+    <footer className="bg-primary text-primary-foreground pt-12 space-y-10 mt-auto">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
         {/* Contact Section */}
         <div>

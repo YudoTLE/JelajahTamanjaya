@@ -12,6 +12,10 @@ export const eventType = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'description',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {

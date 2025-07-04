@@ -18,14 +18,14 @@ export const PostSection = () => {
   }
 
   return (
-    <section className="flex flex-col w-full items-center justify-center h-[100dvh] gap-y-4">
+    <main className="flex flex-col w-full items-center justify-center h-[100dvh] gap-y-4">
       <h1 className="text-5xl font-bold">Posts</h1>
 
       {posts.map(post => (
         <Link
           key={post._id}
           href={`/post/${post.slug?.current}`}
-          className="w-full max-w-2xl block h-full"
+          className="w-full max-w-2xl block"
         >
           <Card className="rounded-xl hover:shadow transition relative overflow-hidden">
             <div className="absolute size-32 bg-emerald-400 rounded-full z-10 top-0 left-0 -translate-x-1/2 -translate-y-1/2" />
@@ -64,6 +64,6 @@ export const PostSection = () => {
           </Card>
         </Link>
       ))}
-    </section>
+    </main>
   );
 };
