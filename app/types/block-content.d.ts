@@ -1,4 +1,3 @@
-
 declare global {
   type Block = {
     _type: 'block'
