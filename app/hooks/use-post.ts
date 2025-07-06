@@ -3,7 +3,7 @@ import { getPosts, getPostBySlug } from '@/lib/axios';
 
 export const useFetchPosts = () => {
   return useQuery({
-    queryKey: ['post'],
+    queryKey: ['posts'],
     queryFn: () => {
       return getPosts();
     },

@@ -1,11 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { getEvents, getEventBySlug } from '@/lib/axios';
+import { getUpcomingEvents, getRunningEvents, getEventBySlug } from '@/lib/axios';
 
-export const useFetchEvents = () => {
+export const useFetchUpcomingEvents = () => {
   return useQuery({
-    queryKey: ['event'],
+    queryKey: ['events', 'upcoming'],
     queryFn: () => {
-      return getEvents();
+      return getUpcomingEvents();
+    },
+    staleTime: 1000 * 60,
+  });
+};
+
+export const useFetchRunningEvents = () => {
+  return useQuery({
+    queryKey: ['events', 'running'],
+    queryFn: () => {
+      return getRunningEvents();
     },
     staleTime: 1000 * 60,
   });

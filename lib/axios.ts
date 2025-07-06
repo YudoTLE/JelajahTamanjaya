@@ -41,7 +41,30 @@ const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug]
   body
 }`);
 
-const fetchEventsQuery = defineQuery(`*[_type == "event"]{
+const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < beginAt]{
+  _id,
+  title,
+  description,
+  slug,
+  mainImage {
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
+  categories[]->{
+    _id,
+    title,
+    slug
+  },
+  publishedAt,
+  beginAt,
+  endAt,
+  body
+}`);
+
+const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= now() && now() <= endAt]{
   _id,
   title,
   description,
@@ -97,8 +120,13 @@ export const getPostBySlug = async (slug: string) => {
   return data;
 };
 
-export const getEvents = async () => {
-  const data = await client.fetch<EventType[]>(fetchEventsQuery);
+export const getUpcomingEvents = async () => {
+  const data = await client.fetch<EventType[]>(fetchUpcomingEventsQuery);
+  return data;
+};
+
+export const getRunningEvents = async () => {
+  const data = await client.fetch<EventType[]>(fetchRunningEventsQuery);
   return data;
 };
 
