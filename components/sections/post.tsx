@@ -40,7 +40,7 @@ export const PostSection = () => {
       </div>
 
       <div className="w-full px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {isPending
             ? [...Array(6)].map((_, i) => (
                 <div key={i}>
@@ -70,15 +70,22 @@ export const PostSection = () => {
                       <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-black/65 via-black/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
 
                       <CardHeader className="z-20">
-                        <h2 className="text-xl text-white font-semibold transition-all duration-300 group-hover:scale-101">
+                        <h2 className="text-xl text-foreground font-semibold transition-all duration-300 group-hover:scale-101">
                           {post.title}
                         </h2>
                       </CardHeader>
 
                       <CardContent className="z-20 flex-1">
-                        {post.excerpt && (
-                          <p className="text-white transition-all duration-300 group-hover:scale-101">
-                            {post.excerpt}
+                        {post.body && (
+                          <p className="text-foreground transition-all duration-300 group-hover:scale-101 line-clamp-7">
+                            {post.body
+                              .map((block) => {
+                                if (block._type === 'block' && Array.isArray(block.children)) {
+                                  return block.children.map(child => child.text).join('');
+                                }
+                                return '';
+                              })
+                              .join(' ')}
                           </p>
                         )}
                       </CardContent>
