@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import { Cloud, Sun, CloudRain, CloudSnow, CloudLightning, Eye } from 'lucide-react';
 import React from 'react';
@@ -96,27 +98,18 @@ export const useFetchWeather = (city: string = 'Sukabumi,ID'): WeatherHookReturn
   const query = useQuery<WeatherApiResponse>({
     queryKey: ['weather', city],
     queryFn: async () => {
-      const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
-      if (!API_KEY) {
-        throw new Error('OpenWeatherMap API key is not configured');
+      const res = await fetch(`/api/weather?city=${city}`);
+      if (!res.ok) {
+        throw new Error(`Weather API error: ${res.status}`);
       }
 
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`,
-      );
-
-      if (!response.ok) {
-        throw new Error(`Weather API error: ${response.status}`);
-      }
-
-      const data = await response.json();
+      const data = await res.json();
       return data;
     },
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });
 
-  // Helper function to get weather icon with more variety
   const getWeatherIcon = (weatherMain: string, isLarge: boolean = false): React.ReactElement => {
     const size = isLarge ? 'w-12 h-12' : 'w-4 h-4';
 
@@ -138,7 +131,6 @@ export const useFetchWeather = (city: string = 'Sukabumi,ID'): WeatherHookReturn
     }
   };
 
-  // Get current weather (first item in the list)
   const getCurrentWeather = (): CurrentWeather | null => {
     if (!query.data?.list || query.data.list.length === 0) return null;
 
@@ -166,7 +158,6 @@ export const useFetchWeather = (city: string = 'Sukabumi,ID'): WeatherHookReturn
     const dailyData: ProcessedForecastItem[] = [];
     const processedDates = new Set<string>();
 
-    // Skip the first item (current weather) and group the rest by day
     for (let i = 1; i < query.data.list.length && dailyData.length < 6; i++) {
       const item = query.data.list[i];
       const date = new Date(item.dt * 1000);
@@ -175,7 +166,6 @@ export const useFetchWeather = (city: string = 'Sukabumi,ID'): WeatherHookReturn
       if (!processedDates.has(dateKey)) {
         processedDates.add(dateKey);
 
-        // Find min/max temps for this day
         const dayForecasts = query.data.list.filter((forecast) => {
           const forecastDate = new Date(forecast.dt * 1000);
           return forecastDate.toDateString() === dateKey;

@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useFetchUpcomingEvents, useFetchRunningEvents } from '@/hooks/use-event';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/lib/image';
@@ -19,14 +19,22 @@ const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
 const EventCarousel = (title: string, { data: events, isPending }: UseQueryResult<EventType[], Error>) => {
-  if (events?.length === 1) {
-    events.push(events[0]);
-    events.push(events[0]);
-  }
-  if (events?.length === 2) {
-    events.push(events[0]);
-    events.push(events[1]);
-  }
+  const processedEvents = useMemo(() => {
+    if (!events || events.length === 0) return [];
+
+    const eventsCopy = [...events];
+
+    if (eventsCopy.length === 1) {
+      eventsCopy.push(eventsCopy[0]);
+      eventsCopy.push(eventsCopy[0]);
+    }
+    if (eventsCopy.length === 2) {
+      eventsCopy.push(eventsCopy[0]);
+      eventsCopy.push(eventsCopy[1]);
+    }
+
+    return eventsCopy;
+  }, [events]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -121,7 +129,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
     };
   }, [emblaApi, tweenOpacity, setTweenFactor, onSelect]);
 
-  if (events?.length === 0) {
+  if (processedEvents.length === 0) {
     return null;
   }
 
@@ -145,7 +153,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                     </div>
                   ))
                 )
-              : events.map((event, index) => {
+              : processedEvents.map((event, index) => {
                   const imageUrl = event.mainImage
                     ? urlFor(event.mainImage).url()
                     : null;
