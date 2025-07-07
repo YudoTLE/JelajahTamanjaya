@@ -1,7 +1,7 @@
 import { defineQuery } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 
-const fetchPostsQuery = defineQuery(`*[_type == "post"]{
+const fetchPostsQuery = defineQuery(`*[_type == "post" && publishedAt <= now()] | order(publishedAt desc){
   _id,
   title,
   slug,
@@ -28,7 +28,7 @@ const fetchPostsQuery = defineQuery(`*[_type == "post"]{
   body
 }`);
 
-const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
+const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug && publishedAt <= now()][0]{
   _id,
   title,
   slug,
@@ -55,7 +55,7 @@ const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug]
   body
 }`);
 
-const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < beginAt]{
+const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < beginAt && publishedAt <= now()] | order(beginAt desc){
   _id,
   title,
   description,
@@ -83,11 +83,10 @@ const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < begi
   beginAt,
   endAt,
   innerShadowColor,
-  outerShadowColor,
   body
 }`);
 
-const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= now() && now() <= endAt]{
+const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= now() && now() <= endAt && publishedAt <= now()] | order(beginAt desc){
   _id,
   title,
   description,
@@ -115,11 +114,10 @@ const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= no
   beginAt,
   endAt,
   innerShadowColor,
-  outerShadowColor,
   body
 }`);
 
-const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slug][0]{
+const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slug && publishedAt <= now()][0]{
   _id,
   title,
   description,
@@ -147,7 +145,6 @@ const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slu
   beginAt,
   endAt,
   innerShadowColor,
-  outerShadowColor,
   body
 }`);
 

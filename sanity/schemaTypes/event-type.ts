@@ -67,14 +67,6 @@ export const eventType = defineType({
       },
     }),
     defineField({
-      name: 'outerShadowColor',
-      title: 'Outer Shadow Color',
-      type: 'color',
-      options: {
-        disableAlpha: false,
-      },
-    }),
-    defineField({
       name: 'body',
       type: 'blockContent',
     }),

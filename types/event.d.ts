@@ -13,7 +13,6 @@ declare global {
     beginAt: string
     endAt: string
     innerShadowColor: Color
-    outerShadowColor: Color
     body: BlockContent
   };
 }

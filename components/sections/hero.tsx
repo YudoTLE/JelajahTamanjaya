@@ -14,7 +14,7 @@ export const HeroSection: React.FC = () => {
 
           <Card className="rounded-md flex border-none justify-center items-center relative overflow-hidden h-full">
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-101"
               style={{ backgroundImage: `url(${mainImageUrl})` }}
             />
 
