@@ -4,6 +4,7 @@ declare global {
       _id: string
       url: string
     }
+    caption?: string
     alt?: string
   };
 }

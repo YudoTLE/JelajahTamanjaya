@@ -4,7 +4,7 @@ import { urlFor } from '@/sanity/lib/image';
 
 const portableTextComponents = {
   types: {
-    image: ({ value }: { value: any }) => (
+    image: ({ value }: { value: Image }) => (
       <div className="my-6 not-prose">
         <Image
           src={urlFor(value).width(800).height(400).url()}

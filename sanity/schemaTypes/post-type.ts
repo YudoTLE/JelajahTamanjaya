@@ -26,6 +26,11 @@ export const postType = defineType({
       },
       fields: [
         defineField({
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        }),
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
