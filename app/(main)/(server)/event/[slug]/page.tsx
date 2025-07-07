@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getEventBySlug } from '@/lib/axios';
-import { PortableText } from '@portabletext/react';
+import { PortableText } from '@/components/ui/portable-text';
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -20,7 +20,9 @@ export default async function EventPage({ params }: Props) {
       <div className="flex flex-col items-center">
         <article className="max-w-3xl w-full px-5 py-8 prose prose-invert">
           <h1 className="text-3xl font-bold">{event.title}</h1>
-          {event.body && <PortableText value={event.body} />}
+          {event.body && (
+            <PortableText value={event.body} />
+          )}
         </article>
       </div>
     );
