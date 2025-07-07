@@ -129,7 +129,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
     };
   }, [emblaApi, tweenOpacity, setTweenFactor, onSelect]);
 
-  if (processedEvents.length === 0) {
+  if (events && events.length === 0) {
     return null;
   }
 
@@ -158,6 +158,11 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                     ? urlFor(event.mainImage).url()
                     : null;
 
+                  const innerShadowColor = event.innerShadowColor?.hex || '#000000';
+                  const innerShadowRgba = event.innerShadowColor
+                    ? `rgba(${event.innerShadowColor.rgb.r}, ${event.innerShadowColor.rgb.g}, ${event.innerShadowColor.rgb.b}, ${event.innerShadowColor.alpha})`
+                    : 'rgba(0, 0, 0, 1)';
+
                   return (
                     <div key={index} className="flex-shrink-0 w-[85%] max-w-4xl px-2">
                       <Link
@@ -172,8 +177,18 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                             />
                           )}
 
-                          <div className="absolute opacity-70 inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-300 group-hover:opacity-90" />
-                          <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-black/65 via-black/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
+                          <div
+                            className="absolute opacity-70 inset-0 transition-all duration-300 group-hover:opacity-90"
+                            style={{
+                              background: `linear-gradient(to top, ${innerShadowRgba}, ${innerShadowColor}40, transparent)`,
+                            }}
+                          />
+                          <div
+                            className="absolute opacity-70 inset-0 transition-all duration-300 group-hover:opacity-90"
+                            style={{
+                              background: `linear-gradient(to right, ${innerShadowRgba.replace(/[\d.]+\)$/, '0.65)')}, ${innerShadowColor}10, transparent)`,
+                            }}
+                          />
 
                           <CardHeader className="z-20">
                             <h2 className="text-3xl text-white font-semibold transition-all duration-300 group-hover:scale-101">

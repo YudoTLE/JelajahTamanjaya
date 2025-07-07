@@ -30,16 +30,16 @@ export const eventType = defineType({
       },
       fields: [
         defineField({
-          name: 'caption',
-          type: 'string',
-          title: 'Caption',
-        }),
-        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative text',
         }),
       ],
+    }),
+    defineField({
+      name: 'author',
+      type: 'reference',
+      to: { type: 'author' },
     }),
     defineField({
       name: 'categories',
@@ -57,6 +57,22 @@ export const eventType = defineType({
     defineField({
       name: 'endAt',
       type: 'datetime',
+    }),
+    defineField({
+      name: 'innerShadowColor',
+      title: 'Inner Shadow Color',
+      type: 'color',
+      options: {
+        disableAlpha: false,
+      },
+    }),
+    defineField({
+      name: 'outerShadowColor',
+      title: 'Outer Shadow Color',
+      type: 'color',
+      options: {
+        disableAlpha: false,
+      },
     }),
     defineField({
       name: 'body',

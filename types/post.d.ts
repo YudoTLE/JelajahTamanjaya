@@ -6,6 +6,7 @@ declare global {
       current: string
     }
     mainImage: Image
+    author: Author
     categories: Category[]
     publishedAt: string
     body: BlockContent

@@ -13,11 +13,6 @@ const portableTextComponents = {
           height={400}
           className="w-full h-auto rounded-lg"
         />
-        {value.caption && (
-          <p className="text-sm text-gray-400 mt-2 text-center italic">
-            {value.caption}
-          </p>
-        )}
       </div>
     ),
   },

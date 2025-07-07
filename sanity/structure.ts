@@ -5,6 +5,15 @@ export const structure: StructureResolver = S =>
     .title('Content Studio')
     .items([
       S.listItem()
+        .title('People')
+        .child(
+          S.list()
+            .title('Author')
+            .items([
+              S.documentTypeListItem('author').title('Authors'),
+            ]),
+        ),
+      S.listItem()
         .title('Publications')
         .child(
           S.list()

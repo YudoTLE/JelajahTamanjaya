@@ -12,6 +12,13 @@ const fetchPostsQuery = defineQuery(`*[_type == "post"]{
     },
     alt
   },
+  author->{
+    fullname,
+    slug,
+    mainImage {
+      alt
+    }
+  },
   categories[]->{
     _id,
     title,
@@ -31,6 +38,13 @@ const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug]
       url
     },
     alt
+  },
+  author->{
+    fullname,
+    slug,
+    mainImage {
+      alt
+    }
   },
   categories[]->{
     _id,
@@ -53,6 +67,13 @@ const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < begi
     },
     alt
   },
+  author->{
+    fullname,
+    slug,
+    mainImage {
+      alt
+    }
+  },
   categories[]->{
     _id,
     title,
@@ -61,6 +82,8 @@ const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < begi
   publishedAt,
   beginAt,
   endAt,
+  innerShadowColor,
+  outerShadowColor,
   body
 }`);
 
@@ -76,6 +99,13 @@ const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= no
     },
     alt
   },
+  author->{
+    fullname,
+    slug,
+    mainImage {
+      alt
+    }
+  },
   categories[]->{
     _id,
     title,
@@ -84,6 +114,8 @@ const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= no
   publishedAt,
   beginAt,
   endAt,
+  innerShadowColor,
+  outerShadowColor,
   body
 }`);
 
@@ -99,6 +131,13 @@ const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slu
     },
     alt
   },
+  author->{
+    fullname,
+    slug,
+    mainImage {
+      alt
+    }
+  },
   categories[]->{
     _id,
     title,
@@ -107,6 +146,8 @@ const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slu
   publishedAt,
   beginAt,
   endAt,
+  innerShadowColor,
+  outerShadowColor,
   body
 }`);
 

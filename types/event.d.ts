@@ -7,10 +7,13 @@ declare global {
       current: string
     }
     mainImage: Image
+    author: Author
     categories: Category[]
     publishedAt: string
     beginAt: string
     endAt: string
+    innerShadowColor: Color
+    outerShadowColor: Color
     body: BlockContent
   };
 }

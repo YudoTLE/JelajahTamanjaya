@@ -77,7 +77,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="bg-secondary p-2">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-secondary-foreground">
           ©
           {' '}
           {new Date().getFullYear()}
