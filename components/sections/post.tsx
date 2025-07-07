@@ -5,22 +5,11 @@ import { format } from 'date-fns';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useFetchPosts } from '@/app/hooks/use-post';
+import { useFetchPosts } from '@/hooks/use-post';
 import { urlFor } from '@/sanity/lib/image';
 
 export const PostSection = () => {
-  const { data: posts, isPending, isError } = useFetchPosts();
-
-  if (isError) {
-    return (
-      <div className="flex flex-col w-full items-center justify-center space-y-2 py-2">
-        <div className="w-full px-8 text-center">
-          <h1 className="text-3xl font-bold">Posts</h1>
-          <p className="text-sm text-red-500 mt-4">Failed to load posts.</p>
-        </div>
-      </div>
-    );
-  }
+  const { data: posts, isPending } = useFetchPosts();
 
   if (!posts || posts.length === 0) {
     return (

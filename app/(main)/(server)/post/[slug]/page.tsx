@@ -18,7 +18,7 @@ export default async function PostPage({ params }: Props) {
 
     return (
       <div className="flex flex-col items-center">
-        <article className="max-w-3xl w-full px-5 py-8 prose dark:prose-invert">
+        <article className="max-w-3xl w-full px-5 py-8 prose prose-invert">
           <h1 className="text-3xl font-bold">{post.title}</h1>
           {post.body && <PortableText value={post.body} />}
         </article>

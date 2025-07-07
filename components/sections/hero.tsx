@@ -1,98 +1,132 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { useState } from 'react';
+import { useFetchWeather } from '@/hooks/use-weather';
 
-export const HeroSection = () => {
-  const [heroData, setHeroData] = useState({
-    main: {
-      imageUrl: '/images/hero.jpg',
-      title: 'Jelajah Tamanjaya',
-      description: 'Discover the hidden charm of Tamanjaya — your gateway to nature, culture, and unforgettable adventures. Explore local attractions, plan your trip, and experience the beauty of Indonesia like never before.',
-    },
-    secondary: [
-      {
-        imageUrl: '/images/hero2.jpg',
-        title: 'Nature',
-        description: 'Explore pristine landscapes and breathtaking views.',
-      },
-      {
-        imageUrl: '/images/hero3.jpg',
-        title: 'Culture',
-        description: 'Immerse yourself in local traditions and heritage.',
-      },
-    ],
-  });
+export const HeroSection: React.FC = () => {
+  const { cityName, currentWeather, dailyForecast, isPending } = useFetchWeather('Sukabumi,ID');
 
-  const handleCardClick = (index: number) => {
-    const clickedCard = heroData.secondary[index];
-    const currentMain = heroData.main;
-
-    setHeroData({
-      ...heroData,
-      main: {
-        imageUrl: clickedCard.imageUrl,
-        title: clickedCard.title,
-        description: clickedCard.description,
-      },
-      secondary: heroData.secondary.map((card, i) =>
-        i === index
-          ? {
-              imageUrl: currentMain.imageUrl,
-              title: currentMain.title,
-              description: currentMain.description,
-            }
-          : card,
-      ),
-    });
-  };
+  const mainImageUrl = '/images/hero.jpg';
 
   return (
     <div className="relative flex flex-col w-full justify-center px-8">
-      <div className="grid grid-cols-3 grid-rows-2 gap-4 h-[600px]">
-        {/* Main Card - 2x2 */}
+      <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-4 h-[600px]">
         <Card className="group rounded-md flex border-none justify-center items-center col-span-2 row-span-2 relative overflow-hidden">
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
-            style={{ backgroundImage: `url(${heroData.main.imageUrl})` }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 hover:scale-105"
+            style={{ backgroundImage: `url(${mainImageUrl})` }}
           />
 
           <div className="absolute opacity-70 inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-300 group-hover:opacity-90" />
           <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-black/65 via-black/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
 
           <CardContent className="z-10 flex flex-col gap-8 w-full px-8 md:px-16">
-            <h1 className="text-5xl text-white font-bold transition-all duration-300">
-              {heroData.main.title}
-            </h1>
-            <p className="text-lg text-white transition-all duration-300">
-              {heroData.main.description}
+            <h1 className="text-5xl text-foreground font-bold">Jelajah Tamanjaya</h1>
+            <p className="text-lg text-foreground">
+              Discover the hidden charm of Tamanjaya — your gateway to nature, culture, and unforgettable adventures. Explore local attractions, plan your trip, and experience the beauty of Indonesia like never before.
             </p>
           </CardContent>
         </Card>
 
-        {/* Secondary Cards */}
-        {heroData.secondary.map((card, index) => (
-          <Card
-            key={index}
-            className="group rounded-md flex border-none justify-center items-center relative overflow-hidden cursor-pointer transform transition-all duration-300"
-            onClick={() => handleCardClick(index)}
-          >
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
-              style={{ backgroundImage: `url(${card.imageUrl})` }}
-            />
+        <Card className="group rounded-md flex flex-col border-none relative overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-blue-800">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-800/40" />
 
-            <div className="absolute opacity-70 inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-300 group-hover:opacity-90" />
-            <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-black/65 via-black/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
+          <CardContent className="z-10 flex flex-col justify-between flex-1">
+            <div className="flex flex-col gap-3">
+              <h2 className="text-xl text-foreground font-bold">{cityName}</h2>
 
-            <CardContent className="z-10 flex flex-col gap-2 w-full px-4">
-              <h2 className="text-2xl text-white font-bold transition-all duration-300">
-                {card.title}
-              </h2>
-              <p className="text-sm text-white transition-all duration-300">
-                {card.description}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
+              {isPending
+                ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                    </div>
+                  )
+                : currentWeather
+                  ? (
+                      <>
+                        {/* Current Weather Section */}
+                        <div className="flex gap-4">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className="flex-shrink-0">
+                                {currentWeather.icon}
+                              </div>
+                              <div className="flex flex-col">
+                                <span className="text-3xl font-bold text-foreground">
+                                  {currentWeather.temp}
+                                  °
+                                </span>
+                                <span className="text-sm text-foreground/80 capitalize">
+                                  {currentWeather.description}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Weather Details */}
+                          <div className="grid grid-cols-1 gap-2">
+                            <div className="text-xs text-foreground/70">
+                              <span className="block">Wind</span>
+                              <span className="text-foreground font-semibold">
+                                {currentWeather.windSpeed}
+                                {' '}
+                                km/h
+                              </span>
+                            </div>
+                            <div className="text-xs text-foreground/70">
+                              <span className="block">Humidity</span>
+                              <span className="text-foreground font-semibold">
+                                {currentWeather.humidity}
+                                %
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Forecast Section */}
+                        <div className="border-t border-white/20 pt-3">
+                          <div className="grid grid-cols-6 gap-2">
+                            {dailyForecast.slice(0, 6).map((day, index) => (
+                              <div key={index} className="flex flex-col items-center text-center">
+                                <span className="text-xs text-foreground/80 mb-1">{day.dayName}</span>
+                                <div className="mb-1">{day.icon}</div>
+                                <div className="flex flex-col gap-0.5">
+                                  <span className="text-xs text-foreground font-semibold">
+                                    {day.tempMax}
+                                    °
+                                  </span>
+                                  <span className="text-xs text-foreground/60">
+                                    {day.tempMin}
+                                    °
+                                  </span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )
+                  : (
+                      <div className="text-center py-4 text-foreground/70">
+                        Weather data unavailable
+                      </div>
+                    )}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="group rounded-md flex border-none justify-center items-center relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46508.00517239035!2d106.47244160364545!3d-7.226226651530203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e42a7485af3807d%3A0xccf4d3bad48a4809!2sTamanjaya%2C%20Kec.%20Ciemas%2C%20Kabupaten%20Sukabumi%2C%20Jawa%20Barat!5e0!3m2!1sen!2sen!4v1751851969091!5m2!1sen!2sen"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </Card>
       </div>
     </div>
   );

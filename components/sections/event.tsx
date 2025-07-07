@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useFetchUpcomingEvents, useFetchRunningEvents } from '@/app/hooks/use-event';
+import { useFetchUpcomingEvents, useFetchRunningEvents } from '@/hooks/use-event';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
@@ -141,7 +141,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
               ? (
                   [...Array(30)].map((_, i) => (
                     <div key={i} className="flex-shrink-0 w-[85%] max-w-4xl px-2">
-                      <Skeleton className="h-[50dvh] w-full rounded-md" />
+                      <Skeleton className="h-[400px] w-full rounded-md" />
                     </div>
                   ))
                 )
@@ -156,7 +156,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                         href={`/event/${event.slug?.current}`}
                         className="w-full block group"
                       >
-                        <Card className="rounded-md border-none hover:shadow-lg h-[50dvh] transition-all duration-300 ease-out relative overflow-hidden">
+                        <Card className="rounded-md border-none hover:shadow-lg h-[400px] transition-all duration-300 ease-out relative overflow-hidden">
                           {imageUrl && (
                             <div
                               className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
@@ -164,8 +164,8 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                             />
                           )}
 
-                          <div className="absolute opacity-70 inset-0 bg-gradient-to-t from-red-500/90 via-red-500/40 to-transparent transition-all duration-300 group-hover:opacity-90" />
-                          <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-red-500/65 via-red-500/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
+                          <div className="absolute opacity-70 inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-300 group-hover:opacity-90" />
+                          <div className="absolute opacity-70 inset-0 bg-gradient-to-r from-black/65 via-black/10 to-transparent transition-all duration-300 group-hover:opacity-90" />
 
                           <CardHeader className="z-20">
                             <h2 className="text-3xl text-white font-semibold transition-all duration-300 group-hover:scale-101">
