@@ -82,10 +82,12 @@ export const PostSection = () => {
                   >
                     <div className="relative rounded-md overflow-hidden">
                       <div className="relative h-[200px] bg-primary-foreground">
-                        <div
-                          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                          style={{ backgroundImage: `url(${imageUrl})` }}
-                        />
+                        {imageUrl && (
+                          <div
+                            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500 group-hover:scale-105"
+                            style={{ backgroundImage: `url(${imageUrl})` }}
+                          />
+                        )}
                       </div>
 
                       <Card className="rounded-md bg-primary text-primary-foreground border-none h-[250px]">

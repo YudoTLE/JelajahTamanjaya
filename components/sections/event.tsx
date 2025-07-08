@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { format } from 'date-fns';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -12,6 +11,7 @@ import { EmblaCarouselType, EmblaEventType } from 'embla-carousel';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { urlFor } from '@/sanity/lib/image';
 import { UseQueryResult } from '@tanstack/react-query';
+import { formatDateTimeRange } from '@/lib/utils';
 
 const TWEEN_FACTOR_BASE = 0.84;
 
@@ -154,7 +154,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                   ))
                 )
               : processedEvents.map((event, index) => {
-                  const imageUrl = event.mainImage
+                  const imageUrl = event.mainImage?.asset
                     ? urlFor(event.mainImage).url()
                     : null;
 
@@ -202,7 +202,7 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                             </p>
                           </CardContent>
 
-                          <CardFooter className="z-20 flex justify-between">
+                          <CardFooter className="z-20 flex gap-2 items-end justify-between">
                             <div className="flex gap-2">
                               {event.categories?.map((c, i) => (
                                 <Badge
@@ -213,10 +213,8 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                                 </Badge>
                               ))}
                             </div>
-                            <p className="text- font-semibold text-gray-200 transition-all duration-300 group-hover:scale-105">
-                              {format(new Date(event.beginAt), 'PPP')}
-                              {' - '}
-                              {format(new Date(event.endAt), 'PPP')}
+                            <p className="text-sm sm:text-md md:text-lg font-semibold text-foreground transition-all duration-300 group-hover:scale-105">
+                              {formatDateTimeRange(event.beginAt, event.endAt)}
                             </p>
                           </CardFooter>
                         </Card>
@@ -255,10 +253,15 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
 
 export const UpcomingEventSection = () => {
   const query = useFetchUpcomingEvents();
+  if (query.data)
+    console.log('UPCOMING', query.data);
+  // return null;
   return EventCarousel('Upcoming Events', query);
 };
 
 export const RunningEventSection = () => {
   const query = useFetchRunningEvents();
+  // console.log('RUNNING', query.data);
+  // return null;
   return EventCarousel('Running Events', query);
 };
