@@ -156,11 +156,11 @@ export async function getPosts(page: number = 1, limit: number = 6) {
   const start = (page - 1) * limit;
   const end = start + limit;
 
-  return client.fetch(fetchPostsQuery, { start, end });
+  return client.fetch<PostType[]>(fetchPostsQuery, { start, end });
 }
 
 export async function getTotalPostCount() {
-  return client.fetch('count(*[_type == "post" && publishedAt <= now()])');
+  return client.fetch<number>('count(*[_type == "post" && publishedAt <= now()])');
 }
 
 export const getPostBySlug = async (slug: string) => {
