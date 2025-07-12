@@ -1,6 +1,6 @@
 import Footer from '@/components/footer';
 
-export default function MainLayout({
+export default function ServerLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

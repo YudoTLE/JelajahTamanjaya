@@ -1,32 +1,36 @@
 import { defineQuery } from 'next-sanity';
 import { client } from '@/sanity/lib/client';
 
-const fetchPostsQuery = defineQuery(`*[_type == "post" && publishedAt <= now()] | order(publishedAt desc){
-  _id,
-  title,
-  slug,
-  mainImage {
-    asset->{
-      _id,
-      url
-    },
-    alt
-  },
-  author->{
-    fullname,
-    slug,
-    mainImage {
-      alt
-    }
-  },
-  categories[]->{
+const fetchPostsQuery = defineQuery(`
+  *[_type == "post" && publishedAt <= now()] 
+  | order(publishedAt desc) 
+  [$start...$end] {
     _id,
     title,
-    slug
-  },
-  publishedAt,
-  body
-}`);
+    slug,
+    mainImage {
+      asset->{
+        _id,
+        url
+      },
+      alt
+    },
+    author->{
+      fullname,
+      slug,
+      mainImage {
+        alt
+      }
+    },
+    categories[]->{
+      _id,
+      title,
+      slug
+    },
+    publishedAt,
+    body
+  }
+`);
 
 const fetchPostBySlug = defineQuery(`*[_type == "post" && slug.current == $slug && publishedAt <= now()][0]{
   _id,
@@ -148,10 +152,16 @@ const fetchEventBySlug = defineQuery(`*[_type == "event" && slug.current == $slu
   body
 }`);
 
-export const getPosts = async () => {
-  const data = await client.fetch<PostType[]>(fetchPostsQuery);
-  return data;
-};
+export async function getPosts(page: number = 1, limit: number = 6) {
+  const start = (page - 1) * limit;
+  const end = start + limit;
+
+  return client.fetch(fetchPostsQuery, { start, end });
+}
+
+export async function getTotalPostCount() {
+  return client.fetch('count(*[_type == "post" && publishedAt <= now()])');
+}
 
 export const getPostBySlug = async (slug: string) => {
   const data = await client.fetch<PostType | null>(fetchPostBySlug, { slug });

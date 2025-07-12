@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useFetchPosts } from '@/hooks/use-post';
 import { urlFor } from '@/sanity/lib/image';
+import { Button } from '../ui/button';
 
 const PostSkeleton = () => {
   return (
@@ -137,6 +138,10 @@ export const PostSection = () => {
               })}
         </div>
       </div>
+
+      <Button asChild>
+        <Link href="/post">See More</Link>
+      </Button>
     </div>
   );
 };
