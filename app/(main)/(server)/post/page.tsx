@@ -17,9 +17,10 @@ import {
 export default async function PostPage({
   searchParams,
 }: {
-  searchParams?: { page?: string }
+  searchParams?: Promise<{ page?: string }>
 }) {
-  const page = parseInt(searchParams?.page || '1', 10);
+  const resolvedSearchParams = await searchParams;
+  const page = parseInt(resolvedSearchParams?.page || '1', 10);
   const count = 6;
 
   const posts = await getPosts(page, count);
