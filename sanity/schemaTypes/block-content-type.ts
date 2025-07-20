@@ -70,6 +70,16 @@ export const blockContentType = defineType({
           type: 'string',
           title: 'Alternative Text',
         },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        },
+        {
+          name: 'src',
+          type: 'string',
+          title: 'Source',
+        },
       ],
     }),
   ],

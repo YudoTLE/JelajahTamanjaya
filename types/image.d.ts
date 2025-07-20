@@ -5,6 +5,8 @@ declare global {
       url: string
     }
     alt?: string
+    caption?: string
+    src?: string
   };
 }
 
