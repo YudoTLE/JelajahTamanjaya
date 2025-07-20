@@ -5,6 +5,8 @@ import { urlFor } from '@/sanity/lib/image';
 const portableTextComponents = {
   types: {
     image: ({ value }: { value: Image }) => {
+      if (!value.asset) return null;
+
       const imageUrl = urlFor(value).url();
       return (
         <div className="my-6 not-prose text-sm text-muted-foreground italic">
