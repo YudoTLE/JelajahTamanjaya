@@ -12,6 +12,7 @@ export default async function PostPage() {
         initialPosts={initialPosts}
         categories={categories}
         limit={limit}
+        variant="default"
       />
     </div>
   );

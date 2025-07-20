@@ -17,6 +17,7 @@ export default async function HomePage() {
         initialPosts={initialPosts}
         categories={categories}
         limit={postLimit}
+        variant="lite"
       />
     </div>
   );

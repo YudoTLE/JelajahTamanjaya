@@ -213,7 +213,7 @@ export const PostFilter = ({
     </div>
   );
 };
-export const PostContainer = (props: { initialData?: PostType[], filter?: string[], search?: string, limit?: number }) => {
+export const PostContainer = (props: { initialData?: PostType[], filter?: string[], search?: string, limit?: number, variant: string }) => {
   const { data: posts, fetchNextPage, hasNextPage, isPending, isFetchingNextPage } = useFetchPosts(props);
 
   if (posts && posts.pages.length === 0) {
@@ -242,7 +242,14 @@ export const PostContainer = (props: { initialData?: PostType[], filter?: string
             ))}
         </div>
       </div>
-      {hasNextPage && (
+      {props.variant === 'lite' && (
+        <div className="flex justify-center">
+          <Button variant="outline" asChild>
+            <Link href="/post">See More</Link>
+          </Button>
+        </div>
+      )}
+      {props.variant === 'default' && hasNextPage && (
         <div className="flex justify-center">
           <Button
             onClick={() => fetchNextPage()}
@@ -261,14 +268,15 @@ export const PostSection = ({
   initialPosts,
   limit,
   categories,
+  variant = 'default',
 }: {
   initialPosts?: PostType[]
   limit?: number
   categories: Category[]
+  variant: string
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const dedicated = true;
 
   const [debouncedSearch, setDebouncedSearch] = useState('');
 
@@ -301,14 +309,8 @@ export const PostSection = ({
         limit={limit}
         search={debouncedSearch}
         filter={selectedCategories}
+        variant={variant}
       />
-      {!dedicated
-        && (
-          <Button asChild>
-            <Link href="/post">See More</Link>
-          </Button>
-        )}
-
     </div>
   );
 };
