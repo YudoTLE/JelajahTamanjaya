@@ -26,7 +26,7 @@ const portableTextComponents = {
             )}
           {value.src
             && (
-              <p>
+              <p className="truncate">
                 {'src: '}
                 <a
                   href={value.src}
