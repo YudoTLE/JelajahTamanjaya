@@ -139,6 +139,8 @@ export async function getPosts({
 
   let baseFilter = '_type == "post" && publishedAt <= now()';
 
+  console.log('isFiltering', isFiltering);
+
   if (isFiltering) {
     const categoryFilter = filter.map((_, index) => `$filter${index} in categories[]->slug.current`).join(' || ');
     baseFilter += ` && (${categoryFilter})`;

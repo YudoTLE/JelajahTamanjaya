@@ -184,7 +184,7 @@ export const PostFilter = ({
 
   return (
     <div className="w-full max-w-4xl">
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrapZ">
         <Button
           variant="outline"
           onClick={() => handleCategoryToggle('all')}
@@ -290,8 +290,8 @@ export const PostSection = ({
 
   return (
     <div className="flex flex-col w-full items-center gap-6 px-8">
-      <div className="space-y-2">
-        <div className="w-full max-w-4xl px-6 text-center text-foreground">
+      <div className="space-y-2 w-full max-w-4xl">
+        <div className="px-6 text-center text-foreground">
           <h1 className="text-2xl font-bold">Posts</h1>
         </div>
         <PostSearchbar
