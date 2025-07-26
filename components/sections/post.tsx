@@ -74,18 +74,25 @@ export const PostItem = ({ post }: { post: PostType }) => {
           <div className="w-full h-full blur-xs bg-primary rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
         </div>
 
-        <div className="rounded-md overflow-hidden transition-all duration-200 ease-out group-hover:-translate-y-1">
-
-          <div className="relative h-[200px] bg-primary-foreground">
+        <div className="rounded-md border border-border overflow-hidden transition-all duration-200 ease-out group-hover:-translate-y-1">
+          <div className="relative h-[300px] bg-primary-foreground">
             {imageUrl && (
               <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${imageUrl})` }}
+                style={{
+                  backgroundImage: `url(${imageUrl})`,
+                  backgroundSize: 'cover',
+                  minHeight: '100%',
+                  minWidth: '100%',
+                }}
               />
             )}
           </div>
-          <Card className="rounded-md bg-card/50 rounded-t-none transition-colors duration-200 h-[270px] relative">
-            <CardHeader className="z-20">
+          <div className="relative h-[75px] w-full bg-gradient-to-b from-transparent to-background -mt-[75px]" />
+          <div className="relative h-[75px] w-full bg-gradient-to-b from-transparent to-card/50 -mt-[75px]" />
+          <Card className="relative border-none bg-card/50 rounded-md rounded-t-none transition-colors duration-200 h-[270px]">
+
+            <CardHeader className="z-20 h-20 -mt-[75px]">
               <h2 className="text-xl font-semibold line-clamp-2">
                 {post.title}
               </h2>
