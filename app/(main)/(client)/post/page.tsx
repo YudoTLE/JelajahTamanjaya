@@ -1,6 +1,8 @@
 import { getPosts, getCategories } from '@/lib/axios';
 import { PostSection } from '@/components/sections/post';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PostPage() {
   const limit = 12;
   const initialPosts = await getPosts({ limit });

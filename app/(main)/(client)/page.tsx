@@ -3,6 +3,8 @@ import { UpcomingEventSection, RunningEventSection } from '@/components/sections
 import { PostSection } from '@/components/sections/post';
 import { getCategories, getPosts } from '@/lib/axios';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const postLimit = 6;
   const initialPosts = await getPosts({ limit: postLimit });
