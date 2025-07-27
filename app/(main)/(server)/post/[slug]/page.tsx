@@ -19,7 +19,7 @@ export default async function PostPage({ params }: Props) {
 
     return (
       <div className="flex flex-col items-center">
-        <article className="max-w-3xl w-full px-5 py-8 prose prose-invert">
+        <article className="max-w-3xl w-full px-5 py-8 prose prose-p:text-justify prose-invert">
           <h1 className="font-bold -mb-4">{post.title}</h1>
           <p className="text-muted-foreground italic">
             published at

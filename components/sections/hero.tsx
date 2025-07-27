@@ -10,9 +10,9 @@ export const HeroSection: React.FC = () => {
 
   return (
     <div className="relative flex flex-col w-full justify-center px-8">
-      <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-4 h-[600px]">
-        <div className="col-span-2 row-span-2 relative group">
-          <div className="absolute -inset-4 bg-green-500/10 group-hover:bg-green-500/20 transition-all duration-500 blur-md transform translate-y-2 rounded-4xl"></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-2 gap-4 h-[1200px] md:h-[600px]">
+        <div className="col-span-1 md:col-span-2 row-span-2 relative group">
+          <div className="absolute -inset-4 bg-green-500/10 group-hover:bg-green-500/20 transition-all duration-500 blur-md transform translate-y-2 rounded-4xl" />
 
           <Card className="rounded-md flex border-none justify-center items-center relative overflow-hidden h-full">
             <div

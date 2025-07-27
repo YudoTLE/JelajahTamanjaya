@@ -90,7 +90,7 @@ export const PostItem = ({ post }: { post: PostType }) => {
           </div>
           <div className="relative h-[75px] w-full bg-gradient-to-b from-transparent to-background -mt-[75px]" />
           <div className="relative h-[75px] w-full bg-gradient-to-b from-transparent to-card/50 -mt-[75px]" />
-          <Card className="relative border-none bg-card/50 rounded-md rounded-t-none transition-colors duration-200 h-[270px]">
+          <Card className="relative border-none bg-card/50 rounded-md rounded-t-none transition-colors duration-200 h-[200px]">
 
             <CardHeader className="z-20 h-20 -mt-[75px]">
               <h2 className="text-xl font-semibold line-clamp-2">
@@ -190,8 +190,8 @@ export const PostFilter = ({
   };
 
   return (
-    <div className="w-full max-w-4xl">
-      <div className="flex gap-2 flex-wrapZ">
+    <div className="w-full max-w-5xl">
+      <div className="flex gap-2 flex-wrap justify-center">
         <Button
           variant="outline"
           onClick={() => handleCategoryToggle('all')}
@@ -297,7 +297,7 @@ export const PostSection = ({
 
   return (
     <div className="flex flex-col w-full items-center gap-6 px-8">
-      <div className="space-y-2 w-full max-w-4xl">
+      <div className="flex flex-col gap-y-2 items-center w-full">
         <div className="px-6 text-center text-foreground">
           <h1 className="text-2xl font-bold">Posts</h1>
         </div>
