@@ -53,6 +53,7 @@ const fetchUpcomingEventsQuery = defineQuery(`*[_type == "event" && now() < begi
     slug
   },
   publishedAt,
+  location,
   beginAt,
   endAt,
   innerShadowColor,
@@ -84,6 +85,7 @@ const fetchRunningEventsQuery = defineQuery(`*[_type == "event" && beginAt <= no
     slug
   },
   publishedAt,
+  location,
   beginAt,
   endAt,
   innerShadowColor,

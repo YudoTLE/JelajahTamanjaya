@@ -78,6 +78,28 @@ export const eventType = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
+      name: 'eventMode',
+      title: 'Event Mode',
+      type: 'string',
+      description: 'Is this event happening online or offline?',
+      initialValue: 'offline',
+      options: {
+        list: [
+          { title: 'Offline', value: 'offline' },
+          { title: 'Online', value: 'online' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'Address or meeting link for the event',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: 'beginAt',
       title: 'Start',
       type: 'datetime',

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { format } from 'date-fns';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -178,26 +179,41 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                           )}
 
                           <div
-                            className="absolute opacity-70 inset-0 transition-all duration-300 group-hover:opacity-90"
+                            className="absolute opacity-40 inset-0 transition-all duration-300 group-hover:opacity-60"
                             style={{
-                              background: `linear-gradient(to top, ${innerShadowRgba}, ${innerShadowColor}40, transparent)`,
+                              background: `linear-gradient(to bottom, ${innerShadowRgba}, ${innerShadowColor}40, transparent)`,
                             }}
                           />
                           <div
-                            className="absolute opacity-70 inset-0 transition-all duration-300 group-hover:opacity-90"
+                            className="absolute opacity-30 inset-0 transition-all duration-300 group-hover:opacity-50"
                             style={{
                               background: `linear-gradient(to right, ${innerShadowRgba.replace(/[\d.]+\)$/, '0.65)')}, ${innerShadowColor}10, transparent)`,
                             }}
                           />
+                          <div
+                            className="absolute opacity-40 inset-0 transition-all duration-300 group-hover:opacity-60"
+                            style={{
+                              background: 'linear-gradient(to top, rgba(0, 0, 0, 1), #000000FF, transparent)',
+                            }}
+                          />
 
-                          <CardHeader className="z-20">
-                            <h2 className="text-3xl text-white font-semibold transition-all duration-300 group-hover:scale-101">
+                          <CardHeader className="z-20 transition-all duration-300 group-hover:scale-101">
+                            <h2 className="text-3xl text-white font-semibold">
                               {event.title}
                             </h2>
+                            <p className="text-xs text-muted-foreground italic">
+                              published at
+                              {' '}
+                              {format(new Date(event.publishedAt), 'PPP')}
+                              {' '}
+                              by
+                              {' '}
+                              {event.author?.fullname}
+                            </p>
                           </CardHeader>
 
-                          <CardContent className="z-20 flex-1">
-                            <p className="text-white transition-all duration-300 group-hover:scale-101">
+                          <CardContent className="z-20 flex-1 transition-all duration-300 group-hover:scale-101">
+                            <p className="text-white">
                               {event.description}
                             </p>
                           </CardContent>
@@ -213,9 +229,14 @@ const EventCarousel = (title: string, { data: events, isPending }: UseQueryResul
                                 </Badge>
                               ))}
                             </div>
-                            <p className="text-sm sm:text-md md:text-lg font-semibold text-foreground transition-all duration-300 group-hover:scale-105">
-                              {formatDateTimeRange(event.beginAt, event.endAt)}
-                            </p>
+                            <div className="text-sm md:text-md text-right text-foreground transition-all duration-300 group-hover:scale-103">
+                              <p>
+                                {event.location}
+                              </p>
+                              <p>
+                                {formatDateTimeRange(event.beginAt, event.endAt)}
+                              </p>
+                            </div>
                           </CardFooter>
                         </Card>
                       </Link>
