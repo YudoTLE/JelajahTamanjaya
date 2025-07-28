@@ -10,7 +10,7 @@ export const eventType = defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'text',
+      type: 'string',
       description: 'The name of your event',
       validation: Rule => Rule.required(),
     }),
@@ -34,7 +34,7 @@ export const eventType = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'string',
+      type: 'text',
       description: 'Brief description of the event',
     }),
     defineField({
