@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -53,8 +54,16 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold">Your Logo</h1>
+          <div className="flex gap-2 flex-shrink-0 items-center font-semibold">
+            <Image
+              src="/images/icon.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="h-8 w-auto"
+              priority
+            />
+            Tamanjaya Sukabumi
           </div>
 
           {/* Desktop Navigation */}
