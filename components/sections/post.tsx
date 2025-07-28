@@ -96,7 +96,7 @@ export const PostItem = ({ post }: { post: PostType }) => {
               <h2 className="text-xl font-semibold line-clamp-2">
                 {post.title}
               </h2>
-              <p className="text-xs text-muted-foreground italic">
+              <p className="text-xs text-muted-foreground italic truncate">
                 published at
                 {' '}
                 {format(new Date(post.publishedAt), 'PPP')}
