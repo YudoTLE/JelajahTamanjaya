@@ -54,7 +54,7 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex gap-2 flex-shrink-0 items-center font-semibold">
+          <div className="flex gap-2 flex-shrink-0 items-center font-sem">
             <Image
               src="/images/icon.png"
               alt="Logo"
