@@ -26,7 +26,7 @@ export const authorType = defineType({
           return regex.test(value) || 'Slug can only contain lowercase letters, numbers, and hyphens';
         }),
       options: {
-        source: 'title',
+        source: 'fullname',
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
     }),
